@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    
+    <title>Cori</title>
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header__logo">Cori</div>
+        <nav class="header__nav">
+            <ul>
+                <li> <a href="#sobre">sobre</a></li>
+                <li> <a href="#cardapio">cardapio</a></li>
+                <li> <a href="#galeria">galeria</a></li>
+                <li> <a href="#reserva" class="header__nav--cta">Reservar mesa</a></li>
+            </ul>
+
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero__content">
+            <p class="hero__tagline">Experiência japonesa autêntica</p>
+            <h1 class="hero__title">Arte e Sabor em cada prato</h1>
+            <a href="#cardapio" class="btn btn--primary">Ver cardápio</a>
+            <a href="#reserva" class="btn btn--outline">Reservar mesa</a>
+        </div>
+    </section>
+
+    <!-- SOBRE -->
+     <section class="sobre" id="sobre">
+        <div class="sobre__imagem">
+            <img src="Imagens-Cori/sobre.jpg" alt="Interior do restaurante Cori">
+        </div>
+        <div class="sobre__content">
+            <p class="sobre__label">Nossa história</p>
+            <h2 class="sobre__title">Fundado com paixão pela culinária japonesa</h2>
+            <p class="sobre__text">O Cori nasceu do sonho de trazer a autêntica experiência gastronômica japonesa para sua cidade. Cada ingrediente é selecionado com cuidado, cada prato preparado com técnica e amor.</p>
+            <a href="#reserva" class="btn btn--outline">Fazer reserva</a>
+        </div>
+     </section>
+     
+     <!-- CARDÁPIO -->
+      <section class="cardapio" id="cardapio">
+        <div class="cardapio__header">
+            <p class="section__label">O que servimos</p>
+            <h2 class="section__title">Nosso Cardápio</h2>
+        </div>
+
+        <div class="cardapio__grid">
+            <article class="prato-card">
+                <div class="prato-card__imagem"> <img src="Imagens-Cori/mikey-frost-klTf2RN37Ts-unsplash.jpg" alt="Gyoza" style="object-position: center center;"></div>
+                 <div class="prato-card__info">
+                 <h3 class="pratp-card__nome">Gyoza</h3>
+                 <p class="prato-card__descricao">Pastel japonês recheado com carne e vegetais grelhados</p>
+                 <span class="prato-card__preco">R$ 32,00</span>
+                </div>
+            </article>
+
+            <article class="prato-card">
+                <div class="prato-card__imagem"> <img src="Imagens-Cori/pexels-quachtungduong-29134778.jpg" alt="Sashimi Premium" style="object-position: center center;"></div>
+                 <div class="prato-card__info">
+                 <h3 class="prato-card__nome">Sashimi Premium</h3>
+                 <p class="prato-card__descricao">Seleção de salmão, atum e peixe branco frescos</p>
+                 <span class="prato-card__preco">R$ 89,00</span>
+                </div>
+            </article>
+                
+         <article class="prato-card">
+            <div class="prato-card__imagem"> <img src="Imagens-Cori/pexels-jbmalong-37014726.jpg" alt=""></div>
+            <div class="prato-card__info">
+                <h3 class="pratp-card__nome">Ramen Tonkotsu</h3>
+                <p class="prato-card__descricao">Caldo de osso de porco com macarrão e chashu</p>
+                <span class="prato-card__preco">R$ 54,00</span>
+            </div>
+         </article>
+        </div>
+      </section>`
+
+      <!-- RESERVA -->
+       <section class="reserva" id="reserva">
+        <p class="section-label">Venha nos visitar</p>
+        <h2 class="section-title">Reserve sua mesa</h2>
+        <form class="reserva__form">
+            <input type="text" placeholder="Seu nome" class="form-input">
+            <input type="email" placeholder="Seu e-mail" class="form-input">
+            <input type="date" class="form-input">
+            <select class="form-input">
+                <option >Numero de pessoas</option>
+                <option>1 pessoa</option>
+                <option>2 pessoas</option>
+                <option>3-4 pessoas</option>
+                <option>5 ou mais</option>
+            </select>
+            <button type="submit" class="btn btn--primary">Confirmar reserva</button>
+        </form>
+       </section>
+
+      <!-- FOOTER -->
+       <footer class="footer">
+        <div class="footer__logo">Cori</div>
+        <p class="footer__endereco">📍 Rua das Flores, 123 — Centro</p>
+        <p class="footer__horario">⏰ Terça a Domingo, 18h às 23h</p>
+        <p class="footer__copy">© 2026 Cori Restaurante</p>
+       </footer>
+
+       <script src="script.js"></script>
+</body>
+</html>
