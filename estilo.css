@@ -1,0 +1,1637 @@
+/* =========================================================
+   CORI — Cozinha Japonesa
+   Paleta: sumi (tinta) + ai (índigo) + ouro usado com parcimônia
+   ========================================================= */
+
+:root {
+    /* Escala de tons escuros — dá respiração entre seções */
+    --sumi-900: #08080a;
+    --sumi-800: #0b0b0d;
+    --sumi-700: #101014;
+    --sumi-600: #16161b;
+    --sumi-500: #1d1d24;
+    --linha:    #26262e;
+
+    /* Índigo tradicional japonês (ai) — o acento secundário */
+    --ai-900: #10182b;
+    --ai-700: #1b2b4b;
+    --ai-500: #2d4a7c;
+
+    /* Ouro: reservado para marca, preços e CTA primário */
+    --ouro:      #c9a84c;
+    --ouro-alto: #e0c473;
+    --ouro-fraco: rgba(201, 168, 76, 0.18);
+
+    /* Texto */
+    --osso:   #f2efe8;
+    --fumaca: #9b968c;
+    --fumaca-fraca: #6d6962;
+    --erro:   #d4674f;
+
+    --font-titulo: 'Playfair Display', Georgia, serif;
+    --font-corpo:  'Lato', -apple-system, 'Segoe UI', sans-serif;
+    --font-jp:     'Noto Serif JP', 'Yu Mincho', 'Hiragino Mincho ProN', serif;
+
+    --header-h: 8rem;
+    --header-h-scroll: 6.4rem;
+    --raio: 2px;
+    --gutter: clamp(2.4rem, 6vw, 10rem);
+    --secao-y: clamp(8rem, 12vw, 16rem);
+
+    --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--header-h);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    font-family: var(--font-corpo);
+    font-weight: 300;
+    background-color: var(--sumi-800);
+    color: var(--osso);
+    font-size: 1.6rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+::selection {
+    background: var(--ouro);
+    color: var(--sumi-900);
+}
+
+:focus-visible {
+    outline: 2px solid var(--ouro);
+    outline-offset: 3px;
+}
+
+.pular-link {
+    position: absolute;
+    left: -999px;
+    top: 1rem;
+    z-index: 999;
+    background: var(--ouro);
+    color: var(--sumi-900);
+    padding: 1.2rem 2rem;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.pular-link:focus {
+    left: 1rem;
+}
+
+/* =========================================================
+   TIPOGRAFIA — três níveis inequívocos
+   ========================================================= */
+
+.secao__label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--fumaca);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+}
+
+.secao__label::before {
+    content: '';
+    width: 3.2rem;
+    height: 1px;
+    background: var(--ouro);
+    flex-shrink: 0;
+}
+
+.secao__title {
+    font-family: var(--font-titulo);
+    font-weight: 400;
+    font-size: clamp(3.4rem, 5vw, 5.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: var(--osso);
+    text-wrap: balance;
+}
+
+.secao__sub {
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--fumaca);
+    max-width: 52ch;
+    line-height: 1.8;
+}
+
+/* =========================================================
+   ESTRUTURA DE SEÇÃO
+   ========================================================= */
+
+.secao {
+    position: relative;
+    padding: var(--secao-y) var(--gutter);
+    overflow: hidden;
+}
+
+.secao--alt {
+    background-color: var(--sumi-700);
+}
+
+.secao--alt::before,
+.secao--alt::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--linha) 20%, var(--linha) 80%, transparent);
+}
+
+.secao--alt::before { top: 0; }
+.secao--alt::after  { bottom: 0; }
+
+/* Kanji gigante em baixíssima opacidade — a assinatura visual */
+.secao__marca-agua {
+    position: absolute;
+    top: 50%;
+    right: -4vw;
+    transform: translateY(-50%);
+    font-family: var(--font-jp);
+    font-weight: 300;
+    font-size: clamp(24rem, 34vw, 46rem);
+    line-height: 1;
+    color: var(--osso);
+    opacity: 0.022;
+    pointer-events: none;
+    user-select: none;
+    z-index: 0;
+}
+
+/* Eleva o conteúdo acima dos elementos decorativos de fundo */
+.secao > *:not(.secao__marca-agua):not(.reserva__padrao) {
+    position: relative;
+    z-index: 1;
+}
+
+.secao__header {
+    max-width: 62rem;
+    margin: 0 auto clamp(5rem, 8vw, 8rem);
+    text-align: center;
+}
+
+.secao__header .secao__label {
+    justify-content: center;
+}
+
+.secao__header .secao__sub {
+    margin: 0 auto;
+}
+
+/* Ornamento divisor: filete + losango (motivo japonês) */
+.ornamento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+    margin: 2.8rem auto;
+    max-width: 24rem;
+}
+
+.ornamento span {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--ouro-fraco), transparent);
+}
+
+.ornamento i {
+    width: 6px;
+    height: 6px;
+    background: var(--ouro);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 var(--gutter);
+    background: transparent;
+    transition: height 0.4s var(--ease), background-color 0.4s var(--ease),
+                backdrop-filter 0.4s var(--ease), border-color 0.4s var(--ease);
+    border-bottom: 1px solid transparent;
+}
+
+.header--scrolled {
+    height: var(--header-h-scroll);
+    background-color: rgba(11, 11, 13, 0.82);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    border-bottom-color: var(--linha);
+}
+
+.header__logo {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.header__logo-nome {
+    font-family: var(--font-titulo);
+    font-size: 2.6rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: var(--ouro);
+    text-indent: 0.32em;
+}
+
+.header__logo-kanji {
+    font-family: var(--font-jp);
+    font-size: 1.3rem;
+    color: var(--fumaca-fraca);
+    letter-spacing: 0.1em;
+    transition: color 0.3s var(--ease);
+}
+
+.header__logo:hover .header__logo-kanji {
+    color: var(--ouro);
+}
+
+.header__lista {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: clamp(2.4rem, 3.4vw, 4.4rem);
+}
+
+/* Peso visual idêntico entre os três links de navegação */
+.header__link {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    color: var(--osso);
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.6rem 0;
+    transition: color 0.3s var(--ease);
+}
+
+.header__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--ouro);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--ease);
+}
+
+.header__link:hover::after,
+.header__link.is-ativa::after {
+    transform: scaleX(1);
+}
+
+.header__link.is-ativa {
+    color: var(--ouro);
+}
+
+.header__cta {
+    display: block;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--osso);
+    border: 1px solid var(--linha);
+    padding: 1.1rem 2.2rem;
+    border-radius: var(--raio);
+    transition: border-color 0.35s var(--ease), color 0.35s var(--ease),
+                background-color 0.35s var(--ease);
+}
+
+.header__cta:hover {
+    border-color: var(--ouro);
+    color: var(--ouro);
+    background-color: var(--ouro-fraco);
+}
+
+.header__toggle {
+    display: none;
+    width: 4.4rem;
+    height: 4.4rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 7px;
+}
+
+.header__toggle-barra {
+    display: block;
+    width: 2.6rem;
+    height: 1px;
+    background: var(--osso);
+    transition: transform 0.35s var(--ease), opacity 0.25s var(--ease), width 0.35s var(--ease);
+}
+
+.header__toggle-barra:last-child {
+    width: 1.8rem;
+}
+
+.header__toggle[aria-expanded="true"] .header__toggle-barra:first-child {
+    transform: translateY(4px) rotate(45deg);
+}
+
+.header__toggle[aria-expanded="true"] .header__toggle-barra:last-child {
+    width: 2.6rem;
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-decoration: none;
+    font-family: var(--font-corpo);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 1.6rem 3.4rem;
+    border-radius: var(--raio);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.35s var(--ease), color 0.35s var(--ease),
+                border-color 0.35s var(--ease), transform 0.25s var(--ease);
+}
+
+.btn--primary {
+    background-color: var(--ouro);
+    color: var(--sumi-900);
+}
+
+.btn--primary:hover:not(:disabled) {
+    background-color: var(--ouro-alto);
+    transform: translateY(-2px);
+}
+
+.btn--ghost {
+    border-color: rgba(242, 239, 232, 0.28);
+    color: var(--osso);
+    background: transparent;
+}
+
+.btn--ghost:hover:not(:disabled) {
+    border-color: var(--osso);
+    background-color: rgba(242, 239, 232, 0.06);
+}
+
+.btn--bloco {
+    width: 100%;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.75;
+}
+
+.btn__spinner {
+    display: none;
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 2px solid rgba(8, 8, 10, 0.25);
+    border-top-color: var(--sumi-900);
+    border-radius: 50%;
+    animation: girar 0.7s linear infinite;
+}
+
+.btn--loading .btn__spinner {
+    display: block;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+/* =========================================================
+   HERO — imagem em tela cheia, título centralizado
+   ========================================================= */
+
+.hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: calc(var(--header-h) + 4rem) var(--gutter) 12rem;
+    overflow: hidden;
+}
+
+.hero__midia {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero__midia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 45%;
+    animation: heroZoom 18s var(--ease) forwards;
+}
+
+@keyframes heroZoom {
+    from { transform: scale(1.08); }
+    to   { transform: scale(1); }
+}
+
+/* Duas camadas de overlay: vinheta + escurecimento vertical */
+.hero__midia::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 85% 65% at 50% 48%, rgba(8, 8, 10, 0.5) 0%, rgba(8, 8, 10, 0.88) 100%),
+        linear-gradient(180deg, rgba(11, 11, 13, 0.9) 0%, rgba(11, 11, 13, 0.5) 30%, rgba(11, 11, 13, 0.78) 78%, var(--sumi-800) 100%);
+}
+
+/* Escrita vertical japonesa (tategaki) — detalhe exclusivo do Cori */
+.hero__tategaki {
+    position: absolute;
+    right: clamp(2rem, 4vw, 5rem);
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    writing-mode: vertical-rl;
+    font-family: var(--font-jp);
+    font-weight: 300;
+    font-size: 1.5rem;
+    letter-spacing: 0.7em;
+    color: var(--ouro);
+    opacity: 0.55;
+    pointer-events: none;
+}
+
+.hero__tategaki::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 8rem;
+    margin: 2.4rem auto 0;
+    background: linear-gradient(180deg, var(--ouro-fraco), transparent);
+}
+
+/* width:100% é essencial: como item de um flex column centralizado, sem ela
+   a caixa assume o tamanho do conteúdo (max-content) e estoura no celular. */
+.hero__content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 88rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero__tagline {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.48em;
+    text-transform: uppercase;
+    color: var(--ouro);
+    text-indent: 0.48em;
+    margin-bottom: 3rem;
+    animation: subir 1s var(--ease) 0.2s both;
+}
+
+/* Cada linha é um bloco: nunca sobra palavra órfã */
+.hero__title {
+    font-family: var(--font-titulo);
+    font-weight: 400;
+    font-size: clamp(4.4rem, 8.5vw, 10rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-bottom: 3.2rem;
+}
+
+.hero__title-linha {
+    display: block;
+    animation: subir 1.1s var(--ease) both;
+}
+
+.hero__title-linha:nth-child(1) { animation-delay: 0.35s; }
+.hero__title-linha:nth-child(2) { animation-delay: 0.5s; }
+
+.hero__title-linha--enfase {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ouro-alto);
+}
+
+.hero__sub {
+    font-size: clamp(1.6rem, 1.9vw, 1.9rem);
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(242, 239, 232, 0.72);
+    max-width: min(54ch, 100%);
+    margin-bottom: 4.4rem;
+    animation: subir 1.1s var(--ease) 0.65s both;
+}
+
+.hero__acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.6rem;
+    animation: subir 1.1s var(--ease) 0.8s both;
+}
+
+.hero__scroll {
+    position: absolute;
+    bottom: 4rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+    text-decoration: none;
+    animation: subir 1.1s var(--ease) 1.1s both;
+}
+
+.hero__scroll-texto {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--fumaca);
+    text-indent: 0.4em;
+}
+
+.hero__scroll-linha {
+    width: 1px;
+    height: 5rem;
+    background: linear-gradient(180deg, var(--ouro), transparent);
+    transform-origin: top;
+    animation: descer 2.4s var(--ease) infinite;
+}
+
+@keyframes descer {
+    0%, 100% { transform: scaleY(0.4); opacity: 0.4; }
+    50%      { transform: scaleY(1);   opacity: 1; }
+}
+
+@keyframes subir {
+    from { opacity: 0; transform: translateY(2.4rem); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   SOBRE
+   ========================================================= */
+
+.sobre__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    gap: clamp(4rem, 7vw, 9rem);
+    align-items: center;
+    max-width: 132rem;
+    margin: 0 auto;
+}
+
+.sobre__midia {
+    position: relative;
+}
+
+/* Moldura deslocada — detalhe gráfico, sem custo de imagem */
+.sobre__midia::before {
+    content: '';
+    position: absolute;
+    inset: -1.6rem -1.6rem 1.6rem 1.6rem;
+    border: 1px solid var(--ouro-fraco);
+    border-radius: var(--raio);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.sobre__midia img {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: clamp(42rem, 58vw, 66rem);
+    object-fit: cover;
+    object-position: center center;
+    border-radius: var(--raio);
+    filter: saturate(0.92);
+    transition: transform 0.8s var(--ease), filter 0.8s var(--ease);
+}
+
+.sobre__midia:hover img {
+    transform: scale(1.02);
+    filter: saturate(1);
+}
+
+.sobre__lead {
+    font-size: clamp(1.7rem, 2vw, 2rem);
+    font-weight: 300;
+    line-height: 1.8;
+    color: rgba(242, 239, 232, 0.78);
+    margin: 2.8rem 0 4rem;
+    max-width: 48ch;
+}
+
+.pilares {
+    list-style: none;
+    display: grid;
+    gap: 2.4rem;
+    border-top: 1px solid var(--linha);
+    padding-top: 3.2rem;
+}
+
+.pilar {
+    display: grid;
+    grid-template-columns: 4.4rem 1fr;
+    gap: 0 2rem;
+    align-items: start;
+}
+
+.pilar__kanji {
+    grid-row: span 2;
+    font-family: var(--font-jp);
+    font-size: 3.2rem;
+    line-height: 1;
+    color: var(--ouro);
+    opacity: 0.85;
+}
+
+.pilar__titulo {
+    font-family: var(--font-corpo);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--osso);
+    margin-bottom: 0.6rem;
+}
+
+.pilar__texto {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--fumaca);
+    line-height: 1.7;
+}
+
+/* =========================================================
+   CARDÁPIO
+   ========================================================= */
+
+.cardapio__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: clamp(2.4rem, 3vw, 4rem);
+    max-width: 128rem;
+    margin: 0 auto;
+}
+
+.prato {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--sumi-600);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    overflow: hidden;
+    transition: transform 0.5s var(--ease), border-color 0.5s var(--ease),
+                box-shadow 0.5s var(--ease);
+}
+
+.prato:hover {
+    transform: translateY(-8px);
+    border-color: var(--ouro-fraco);
+    box-shadow: 0 28px 60px rgba(0, 0, 0, 0.5);
+}
+
+.prato__midia {
+    position: relative;
+    height: 26rem;
+    overflow: hidden;
+    background-color: var(--sumi-500);
+}
+
+.prato__midia img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+}
+
+.prato:hover .prato__midia img {
+    transform: scale(1.06);
+}
+
+.prato__midia::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 45%, rgba(8, 8, 10, 0.75) 100%);
+}
+
+.prato__indice {
+    position: absolute;
+    top: 1.8rem;
+    left: 2rem;
+    z-index: 2;
+    font-family: var(--font-titulo);
+    font-size: 1.3rem;
+    letter-spacing: 0.16em;
+    color: rgba(242, 239, 232, 0.55);
+}
+
+.prato__info {
+    padding: 3rem 2.8rem 3.2rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.prato__topo {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1.6rem;
+    margin-bottom: 1.4rem;
+}
+
+.prato__nome {
+    font-family: var(--font-titulo);
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 1.2;
+    color: var(--osso);
+}
+
+.prato__kana {
+    font-family: var(--font-jp);
+    font-size: 1.4rem;
+    color: var(--fumaca-fraca);
+    flex-shrink: 0;
+}
+
+.prato__descricao {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--fumaca);
+    line-height: 1.75;
+    margin-bottom: 2.6rem;
+    flex: 1;
+}
+
+.prato__preco {
+    font-family: var(--font-titulo);
+    font-size: 2.2rem;
+    font-weight: 500;
+    color: var(--ouro);
+    line-height: 1;
+    padding-top: 2rem;
+    border-top: 1px solid var(--linha);
+}
+
+.prato__moeda {
+    font-family: var(--font-corpo);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: var(--fumaca);
+    margin-right: 0.4rem;
+}
+
+/* =========================================================
+   GALERIA
+   ========================================================= */
+
+/* Grade editorial assimétrica: posições explícitas, sem buracos */
+.galeria__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 22rem;
+    gap: 1.6rem;
+    max-width: 132rem;
+    margin: 0 auto;
+}
+
+.foto:nth-child(1) { grid-column: 1;            grid-row: 1 / span 2; }
+.foto:nth-child(2) { grid-column: 2 / span 2;   grid-row: 1; }
+.foto:nth-child(3) { grid-column: 4;            grid-row: 1; }
+.foto:nth-child(4) { grid-column: 2;            grid-row: 2; }
+.foto:nth-child(5) { grid-column: 3 / span 2;   grid-row: 2; }
+
+.foto {
+    position: relative;
+    display: block;
+    padding: 0;
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    background: var(--sumi-600);
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.5s var(--ease);
+}
+
+.foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.85) brightness(0.86);
+    transition: transform 0.9s var(--ease), filter 0.6s var(--ease);
+}
+
+.foto:hover {
+    border-color: var(--ouro-fraco);
+}
+
+.foto:hover img,
+.foto:focus-visible img {
+    transform: scale(1.05);
+    filter: saturate(1) brightness(1);
+}
+
+.foto__legenda {
+    position: absolute;
+    left: 2rem;
+    bottom: 1.8rem;
+    z-index: 2;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--osso);
+    opacity: 0;
+    transform: translateY(0.8rem);
+    transition: opacity 0.45s var(--ease), transform 0.45s var(--ease);
+}
+
+.foto::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 50%, rgba(8, 8, 10, 0.8) 100%);
+    opacity: 0;
+    transition: opacity 0.45s var(--ease);
+}
+
+.foto:hover::after,
+.foto:focus-visible::after {
+    opacity: 1;
+}
+
+.foto:hover .foto__legenda,
+.foto:focus-visible .foto__legenda {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   RESERVA
+   ========================================================= */
+
+.reserva {
+    position: relative;
+}
+
+/* Seigaiha (青海波) — padrão tradicional de ondas, feito em CSS puro */
+.reserva__padrao {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    background-color: transparent;
+    background-image:
+        radial-gradient(circle at 100% 150%, transparent 24%, var(--ouro-fraco) 25%, var(--ouro-fraco) 26%, transparent 27%, transparent 35%, var(--ouro-fraco) 36%, var(--ouro-fraco) 37%, transparent 38%),
+        radial-gradient(circle at 0    150%, transparent 24%, var(--ouro-fraco) 25%, var(--ouro-fraco) 26%, transparent 27%, transparent 35%, var(--ouro-fraco) 36%, var(--ouro-fraco) 37%, transparent 38%),
+        radial-gradient(circle at 50%  100%, transparent 10%, var(--ouro-fraco) 11%, var(--ouro-fraco) 12%, transparent 13%, transparent 23%, var(--ouro-fraco) 24%, var(--ouro-fraco) 25%, transparent 26%, transparent 35%, var(--ouro-fraco) 36%, var(--ouro-fraco) 37%, transparent 38%),
+        radial-gradient(circle at 100% 50%,  transparent 10%, var(--ouro-fraco) 11%, var(--ouro-fraco) 12%, transparent 13%, transparent 23%, var(--ouro-fraco) 24%, var(--ouro-fraco) 25%, transparent 26%, transparent 35%, var(--ouro-fraco) 36%, var(--ouro-fraco) 37%, transparent 38%),
+        radial-gradient(circle at 0    50%,  transparent 10%, var(--ouro-fraco) 11%, var(--ouro-fraco) 12%, transparent 13%, transparent 23%, var(--ouro-fraco) 24%, var(--ouro-fraco) 25%, transparent 26%, transparent 35%, var(--ouro-fraco) 36%, var(--ouro-fraco) 37%, transparent 38%);
+    background-size: 9rem 4.5rem;
+    -webkit-mask-image: radial-gradient(ellipse 70% 90% at 12% 50%, #000 0%, transparent 72%);
+            mask-image: radial-gradient(ellipse 70% 90% at 12% 50%, #000 0%, transparent 72%);
+}
+
+.reserva__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(4rem, 8vw, 10rem);
+    align-items: start;
+    max-width: 118rem;
+    margin: 0 auto;
+}
+
+.reserva__aside {
+    position: relative;
+}
+
+.reserva__texto {
+    font-size: 1.7rem;
+    font-weight: 300;
+    color: var(--fumaca);
+    line-height: 1.8;
+    margin: 2.8rem 0 4rem;
+    max-width: 42ch;
+}
+
+.reserva__dados {
+    display: grid;
+    gap: 2.4rem;
+    border-top: 1px solid var(--linha);
+    padding-top: 3rem;
+}
+
+.reserva__dado dt {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--fumaca-fraca);
+    margin-bottom: 0.6rem;
+}
+
+.reserva__dado dd {
+    font-family: var(--font-titulo);
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--osso);
+}
+
+.reserva__tategaki {
+    position: absolute;
+    right: 2rem;
+    top: 0;
+    writing-mode: vertical-rl;
+    font-family: var(--font-jp);
+    font-size: 1.4rem;
+    letter-spacing: 0.6em;
+    color: var(--ouro);
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+/* ---- Formulário ---- */
+
+.reserva__form {
+    display: grid;
+    gap: 2.6rem;
+    background-color: var(--sumi-600);
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    padding: clamp(2.8rem, 4vw, 4.4rem);
+}
+
+/* display:grid acima venceria o [hidden] do navegador — reforçamos aqui */
+.reserva__form[hidden] {
+    display: none;
+}
+
+.campo-duplo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.campo {
+    position: relative;
+}
+
+/* Label sempre presente: sobe ao focar ou preencher, nunca desaparece */
+.campo__label {
+    position: absolute;
+    left: 1.6rem;
+    top: 1.7rem;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--fumaca);
+    pointer-events: none;
+    transform-origin: left top;
+    transition: transform 0.28s var(--ease), color 0.28s var(--ease);
+    background: var(--sumi-600);
+    padding: 0 0.6rem;
+}
+
+.campo__input {
+    width: 100%;
+    padding: 1.7rem 1.6rem;
+    background-color: transparent;
+    border: 1px solid var(--linha);
+    border-radius: var(--raio);
+    color: var(--osso);
+    font-family: var(--font-corpo);
+    font-size: 1.5rem;
+    font-weight: 300;
+    transition: border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+    color-scheme: dark;
+}
+
+.campo__input--area {
+    resize: vertical;
+    min-height: 9rem;
+    line-height: 1.6;
+}
+
+.campo__input:hover:not(:focus) {
+    border-color: #33333d;
+}
+
+.campo__input:focus {
+    outline: none;
+    border-color: var(--ouro);
+    background-color: rgba(201, 168, 76, 0.04);
+}
+
+/* Estado flutuante */
+.campo__input:focus ~ .campo__label,
+.campo__input:not(:placeholder-shown) ~ .campo__label,
+.campo--preenchido .campo__label {
+    transform: translateY(-2.6rem) scale(0.76);
+    color: var(--fumaca);
+}
+
+.campo__input:focus ~ .campo__label {
+    color: var(--ouro);
+}
+
+/* Data e select: aparência unificada, sem depender do widget do SO */
+input[type="date"].campo__input {
+    min-height: 5.5rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(72%) sepia(38%) saturate(560%) hue-rotate(2deg) brightness(92%);
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+.campo--select .campo__input {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    padding-right: 4rem;
+}
+
+.campo--select::after {
+    content: '';
+    position: absolute;
+    right: 1.8rem;
+    top: 2.4rem;
+    width: 7px;
+    height: 7px;
+    border-right: 1px solid var(--ouro);
+    border-bottom: 1px solid var(--ouro);
+    transform: rotate(45deg);
+    pointer-events: none;
+}
+
+.campo--select option {
+    background-color: var(--sumi-600);
+    color: var(--osso);
+}
+
+/* Validação visual */
+.campo__erro {
+    font-size: 1.3rem;
+    color: var(--erro);
+    min-height: 0;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.3s var(--ease), opacity 0.3s var(--ease),
+                margin-top 0.3s var(--ease);
+}
+
+.campo.is-invalido .campo__erro {
+    max-height: 4rem;
+    opacity: 1;
+    margin-top: 0.8rem;
+}
+
+.campo.is-invalido .campo__input {
+    border-color: var(--erro);
+}
+
+.campo.is-invalido .campo__label {
+    color: var(--erro);
+}
+
+.campo.is-valido .campo__input {
+    border-color: rgba(201, 168, 76, 0.45);
+}
+
+/* ---- Sucesso ---- */
+
+.reserva__sucesso {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.6rem;
+    background-color: var(--sumi-600);
+    border: 1px solid var(--ouro-fraco);
+    border-radius: var(--raio);
+    padding: clamp(4rem, 6vw, 6rem) clamp(2.8rem, 4vw, 4.4rem);
+    animation: subir 0.6s var(--ease) both;
+}
+
+.reserva__sucesso[hidden] {
+    display: none;
+}
+
+.reserva__sucesso-kanji {
+    font-family: var(--font-jp);
+    font-size: 5.6rem;
+    line-height: 1;
+    color: var(--ouro);
+    margin-bottom: 0.8rem;
+}
+
+.reserva__sucesso-titulo {
+    font-family: var(--font-titulo);
+    font-weight: 400;
+    font-size: 3rem;
+    color: var(--osso);
+}
+
+.reserva__sucesso-texto {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--fumaca);
+    max-width: 38ch;
+    margin-bottom: 1.6rem;
+}
+
+.reserva__sucesso-texto strong {
+    color: var(--osso);
+    font-weight: 400;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    background-color: var(--sumi-900);
+    border-top: 1px solid var(--linha);
+    padding: clamp(6rem, 8vw, 9rem) var(--gutter) 3rem;
+}
+
+.footer__inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: clamp(3rem, 5vw, 6rem);
+    max-width: 132rem;
+    margin: 0 auto clamp(4rem, 6vw, 6rem);
+}
+
+.footer__logo {
+    display: block;
+    font-family: var(--font-titulo);
+    font-size: 2.6rem;
+    font-weight: 500;
+    letter-spacing: 0.32em;
+    color: var(--ouro);
+    text-indent: 0.32em;
+}
+
+.footer__kanji {
+    display: block;
+    font-family: var(--font-jp);
+    font-size: 1.3rem;
+    letter-spacing: 0.2em;
+    color: var(--fumaca-fraca);
+    margin-top: 0.6rem;
+}
+
+.footer__frase {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--fumaca);
+    margin-top: 2rem;
+    max-width: 32ch;
+}
+
+.footer__titulo {
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--fumaca-fraca);
+    margin-bottom: 1.6rem;
+}
+
+.footer__coluna p {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--osso);
+    line-height: 1.9;
+}
+
+.footer__coluna a {
+    color: var(--osso);
+    text-decoration: none;
+    transition: color 0.3s var(--ease);
+}
+
+.footer__coluna a:hover {
+    color: var(--ouro);
+}
+
+.footer__base {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 132rem;
+    margin: 0 auto;
+    padding-top: 3rem;
+    border-top: 1px solid var(--linha);
+    font-size: 1.3rem;
+    color: var(--fumaca-fraca);
+}
+
+/* =========================================================
+   LIGHTBOX
+   ========================================================= */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(2rem, 6vw, 8rem);
+    background: rgba(8, 8, 10, 0.96);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    animation: aparecer 0.35s var(--ease);
+}
+
+.lightbox[hidden] {
+    display: none;
+}
+
+@keyframes aparecer {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.lightbox__figura {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.lightbox__figura img {
+    max-width: 100%;
+    max-height: 78svh;
+    width: auto;
+    object-fit: contain;
+    border-radius: var(--raio);
+}
+
+.lightbox__figura figcaption {
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--fumaca);
+    text-indent: 0.32em;
+}
+
+.lightbox__fechar,
+.lightbox__nav {
+    position: absolute;
+    background: none;
+    border: 1px solid var(--linha);
+    border-radius: 50%;
+    color: var(--osso);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s var(--ease), color 0.3s var(--ease),
+                background-color 0.3s var(--ease);
+}
+
+.lightbox__fechar:hover,
+.lightbox__nav:hover {
+    border-color: var(--ouro);
+    color: var(--ouro);
+    background-color: var(--ouro-fraco);
+}
+
+.lightbox__fechar {
+    top: 2.4rem;
+    right: 2.4rem;
+    width: 4.8rem;
+    height: 4.8rem;
+    font-size: 3rem;
+    line-height: 1;
+}
+
+.lightbox__nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5.6rem;
+    height: 5.6rem;
+    font-size: 3.4rem;
+    line-height: 1;
+    padding-bottom: 0.4rem;
+}
+
+.lightbox__nav--ant  { left: clamp(1rem, 3vw, 4rem); }
+.lightbox__nav--prox { right: clamp(1rem, 3vw, 4rem); }
+
+body.sem-scroll {
+    overflow: hidden;
+}
+
+/* =========================================================
+   REVEAL AO ROLAR
+   ========================================================= */
+
+/* Escondemos só quando há JS: sem script, o conteúdo continua visível */
+.js .reveal {
+    opacity: 0;
+    transform: translateY(3rem);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+
+.js .reveal.is-visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Escalonamento nas grades */
+.cardapio__grid .reveal:nth-child(2),
+.galeria__grid .reveal:nth-child(2) { transition-delay: 0.1s; }
+
+.cardapio__grid .reveal:nth-child(3),
+.galeria__grid .reveal:nth-child(3) { transition-delay: 0.2s; }
+
+.galeria__grid .reveal:nth-child(4) { transition-delay: 0.3s; }
+.galeria__grid .reveal:nth-child(5) { transition-delay: 0.4s; }
+
+.sobre__content .reveal:nth-child(2) { transition-delay: 0.08s; }
+.sobre__content .reveal:nth-child(3) { transition-delay: 0.16s; }
+.sobre__content .reveal:nth-child(4) { transition-delay: 0.24s; }
+
+/* =========================================================
+   RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 1080px) {
+    .sobre__inner {
+        grid-template-columns: 1fr;
+    }
+
+    .sobre__midia img {
+        height: clamp(34rem, 50vw, 48rem);
+    }
+
+    .reserva__inner {
+        grid-template-columns: 1fr;
+        max-width: 62rem;
+    }
+
+    .reserva__sucesso {
+        grid-column: 1;
+    }
+
+    .reserva__tategaki {
+        display: none;
+    }
+
+    .footer__inner {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .galeria__grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 20rem;
+    }
+
+    /* Volta ao fluxo automático: a grade editorial só vale no desktop */
+    .foto:nth-child(n) {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .foto:nth-child(1) { grid-column: span 2; }
+}
+
+@media (max-width: 780px) {
+    :root {
+        --header-h: 6.8rem;
+        --header-h-scroll: 6rem;
+    }
+
+    .header__toggle {
+        display: flex;
+    }
+
+    /* O painel fica acima do conteúdo, e logo/botão acima do painel. */
+    .header__nav {
+        position: fixed;
+        inset: 0 0 0 auto;
+        width: min(80vw, 34rem);
+        background-color: var(--sumi-700);
+        border-left: 1px solid var(--linha);
+        padding: calc(var(--header-h) + 4rem) 3.2rem 3.2rem;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        transform: translateX(100%);
+        transition: transform 0.45s var(--ease);
+        z-index: 1;
+    }
+
+    .header__logo   { z-index: 2; }
+    .header__toggle { z-index: 3; }
+
+    .header__nav.is-aberta {
+        transform: translateX(0);
+        box-shadow: -30px 0 60px rgba(0, 0, 0, 0.5);
+    }
+
+    .header__lista {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .header__lista li {
+        border-bottom: 1px solid var(--linha);
+    }
+
+    .header__lista li:last-child {
+        border-bottom: none;
+        margin-top: 2.4rem;
+    }
+
+    .header__link {
+        font-size: 1.4rem;
+        padding: 2rem 0;
+    }
+
+    .header__link::after {
+        display: none;
+    }
+
+    .header__cta {
+        text-align: center;
+        padding: 1.6rem 2rem;
+    }
+
+    /* No mobile o header usa fundo sólido, sem backdrop-filter.
+       Um filtro aqui tornaria o header o bloco de contenção do .header__nav
+       (position: fixed), e o painel colapsaria para a altura do header. */
+    .header--scrolled,
+    .header.is-menu-aberto {
+        background-color: rgba(11, 11, 13, 0.96);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .hero {
+        padding-bottom: 10rem;
+    }
+
+    .hero__tategaki {
+        display: none;
+    }
+
+    .campo-duplo {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__inner {
+        grid-template-columns: 1fr;
+        gap: 3.2rem;
+    }
+
+    .footer__base {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+
+    .lightbox__nav {
+        width: 4.4rem;
+        height: 4.4rem;
+        font-size: 2.6rem;
+    }
+
+    .btn {
+        padding: 1.5rem 2.6rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .galeria__grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 24rem;
+    }
+
+    .foto:nth-child(1) { grid-column: auto; }
+
+    .hero__acoes {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .hero__acoes .btn {
+        width: 100%;
+    }
+
+    .prato__topo {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+}
+
+/* =========================================================
+   MOVIMENTO REDUZIDO
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .js .reveal {
+        opacity: 1;
+        transform: none;
+    }
+}

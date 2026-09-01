@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Cori — restaurante japonês. Cozinha sazonal, balcão de sushi e omakase. Rua das Flores, 123. Reserve sua mesa.">
+    <meta name="theme-color" content="#0b0b0d">
+
+    <title>Cori — Cozinha Japonesa</title>
+
+    <!-- Marca que há JS antes da primeira pintura: as animações de entrada
+         só escondem conteúdo quando existe script para revelá-lo. -->
+    <script>document.documentElement.classList.add('js');</script>
+
+    <link rel="stylesheet" href="estilo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Lato:wght@300;400;700;900&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#conteudo" class="pular-link">Pular para o conteúdo</a>
+
+    <!-- ===== HEADER ===== -->
+    <header class="header" id="header">
+        <a href="#hero" class="header__logo">
+            <span class="header__logo-nome">Cori</span>
+            <span class="header__logo-kanji" aria-hidden="true">香里</span>
+        </a>
+
+        <nav class="header__nav" id="nav" aria-label="Navegação principal">
+            <ul class="header__lista">
+                <li><a href="#sobre" class="header__link" data-nav="sobre">Sobre</a></li>
+                <li><a href="#cardapio" class="header__link" data-nav="cardapio">Cardápio</a></li>
+                <li><a href="#galeria" class="header__link" data-nav="galeria">Galeria</a></li>
+                <li><a href="#reserva" class="header__cta">Reservar mesa</a></li>
+            </ul>
+        </nav>
+
+        <button class="header__toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">
+            <span class="header__toggle-barra"></span>
+            <span class="header__toggle-barra"></span>
+        </button>
+    </header>
+
+    <main id="conteudo">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="hero__midia">
+            <img src="Imagens-Cori/pexels-hengki-w-140941276-19679954.jpg"
+                 alt="Corredor iluminado de um izakaya com bandeiras noren japonesas"
+                 fetchpriority="high" decoding="async">
+        </div>
+
+        <p class="hero__tategaki" aria-hidden="true">旬の味</p>
+
+        <div class="hero__content">
+            <p class="hero__tagline">Experiência japonesa autêntica</p>
+
+            <h1 class="hero__title">
+                <span class="hero__title-linha">Arte e sabor</span>
+                <span class="hero__title-linha hero__title-linha--enfase">em cada prato</span>
+            </h1>
+
+            <p class="hero__sub">Cozinha sazonal servida em um balcão de nove lugares, onde cada prato é entregue direto das mãos do itamae.</p>
+
+            <div class="hero__acoes">
+                <a href="#reserva" class="btn btn--primary">Reservar mesa</a>
+                <a href="#cardapio" class="btn btn--ghost">Ver cardápio</a>
+            </div>
+        </div>
+
+        <a href="#sobre" class="hero__scroll" aria-label="Rolar para a próxima seção">
+            <span class="hero__scroll-texto">Role</span>
+            <span class="hero__scroll-linha" aria-hidden="true"></span>
+        </a>
+    </section>
+
+    <!-- ===== SOBRE ===== -->
+    <section class="sobre secao" id="sobre">
+        <span class="secao__marca-agua" aria-hidden="true">和</span>
+
+        <div class="sobre__inner">
+            <div class="sobre__midia reveal">
+                <img src="Imagens-Cori/sobre.jpg"
+                     alt="Salão do Cori com mesas de madeira e vista para o jardim"
+                     loading="lazy" decoding="async">
+            </div>
+
+            <div class="sobre__content">
+                <p class="secao__label reveal">Nossa história</p>
+                <h2 class="secao__title reveal">Um balcão, nove lugares,<br>uma estação por vez</h2>
+
+                <p class="sobre__lead reveal">O Cori nasceu do desejo de servir a cozinha japonesa como ela é praticada em Tóquio: sem excessos, guiada pelo que o mar entrega naquela semana.</p>
+
+                <ul class="pilares reveal">
+                    <li class="pilar">
+                        <span class="pilar__kanji" aria-hidden="true">旬</span>
+                        <h3 class="pilar__titulo">Sazonalidade</h3>
+                        <p class="pilar__texto">O cardápio muda conforme a estação e a pesca do dia.</p>
+                    </li>
+                    <li class="pilar">
+                        <span class="pilar__kanji" aria-hidden="true">技</span>
+                        <h3 class="pilar__titulo">Técnica</h3>
+                        <p class="pilar__texto">Cortes e caldos executados à vista, no balcão.</p>
+                    </li>
+                    <li class="pilar">
+                        <span class="pilar__kanji" aria-hidden="true">心</span>
+                        <h3 class="pilar__titulo">Hospitalidade</h3>
+                        <p class="pilar__texto">Omotenashi: cuidar antes de ser preciso pedir.</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CARDÁPIO ===== -->
+    <section class="cardapio secao secao--alt" id="cardapio">
+        <span class="secao__marca-agua" aria-hidden="true">味</span>
+
+        <header class="secao__header reveal">
+            <p class="secao__label">O que servimos</p>
+            <h2 class="secao__title">Nosso cardápio</h2>
+            <div class="ornamento" aria-hidden="true"><span></span><i></i><span></span></div>
+            <p class="secao__sub">Uma seleção fixa acompanha o menu sazonal. Os preços abaixo são por porção individual.</p>
+        </header>
+
+        <div class="cardapio__grid">
+            <article class="prato reveal">
+                <div class="prato__midia">
+                    <img src="Imagens-Cori/mikey-frost-klTf2RN37Ts-unsplash.jpg"
+                         alt="Porção de gyoza grelhado" loading="lazy" decoding="async">
+                    <span class="prato__indice" aria-hidden="true">01</span>
+                </div>
+                <div class="prato__info">
+                    <div class="prato__topo">
+                        <h3 class="prato__nome">Gyoza</h3>
+                        <span class="prato__kana" aria-hidden="true">餃子</span>
+                    </div>
+                    <p class="prato__descricao">Massa fina recheada com porco e cebolinha, selada na chapa e finalizada no vapor.</p>
+                    <p class="prato__preco"><span class="prato__moeda">R$</span> 32</p>
+                </div>
+            </article>
+
+            <article class="prato reveal">
+                <div class="prato__midia">
+                    <img src="Imagens-Cori/pexels-quachtungduong-29134778.jpg"
+                         alt="Sashimi premium de salmão, atum e peixe branco" loading="lazy" decoding="async">
+                    <span class="prato__indice" aria-hidden="true">02</span>
+                </div>
+                <div class="prato__info">
+                    <div class="prato__topo">
+                        <h3 class="prato__nome">Sashimi Premium</h3>
+                        <span class="prato__kana" aria-hidden="true">刺身</span>
+                    </div>
+                    <p class="prato__descricao">Nove cortes da pesca do dia: salmão, atum e o peixe branco da estação.</p>
+                    <p class="prato__preco"><span class="prato__moeda">R$</span> 89</p>
+                </div>
+            </article>
+
+            <article class="prato reveal">
+                <div class="prato__midia">
+                    <img src="Imagens-Cori/pexels-jbmalong-37014726.jpg"
+                         alt="Tigela de ramen tonkotsu com chashu e cebolinha" loading="lazy" decoding="async">
+                    <span class="prato__indice" aria-hidden="true">03</span>
+                </div>
+                <div class="prato__info">
+                    <div class="prato__topo">
+                        <h3 class="prato__nome">Ramen Tonkotsu</h3>
+                        <span class="prato__kana" aria-hidden="true">豚骨</span>
+                    </div>
+                    <p class="prato__descricao">Caldo de osso de porco cozido por doze horas, macarrão fino e chashu maçaricado.</p>
+                    <p class="prato__preco"><span class="prato__moeda">R$</span> 54</p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ===== GALERIA ===== -->
+    <section class="galeria secao" id="galeria">
+        <span class="secao__marca-agua" aria-hidden="true">景</span>
+
+        <header class="secao__header reveal">
+            <p class="secao__label">O ambiente</p>
+            <h2 class="secao__title">A casa por dentro</h2>
+            <div class="ornamento" aria-hidden="true"><span></span><i></i><span></span></div>
+        </header>
+
+        <div class="galeria__grid" id="galeria-grid">
+            <button class="foto reveal" type="button" data-indice="0">
+                <img src="Imagens-Cori/pexels-eugeniofr-30988961.jpg"
+                     alt="Tigela de ramen tonkotsu servida no balcão" loading="lazy" decoding="async">
+                <span class="foto__legenda">O balcão</span>
+            </button>
+
+            <button class="foto reveal" type="button" data-indice="1">
+                <img src="Imagens-Cori/pexels-am-74-503055206-16108809.jpg"
+                     alt="Caixa de madeira com seleção de sashimi" loading="lazy" decoding="async">
+                <span class="foto__legenda">Sashimi do dia</span>
+            </button>
+
+            <button class="foto reveal" type="button" data-indice="2">
+                <img src="Imagens-Cori/pexels-soc-nang-d-ng-2150345854-35833832.jpg"
+                     alt="Bancada de madeira com tigelas e temperos" loading="lazy" decoding="async">
+                <span class="foto__legenda">Mise en place</span>
+            </button>
+
+            <button class="foto reveal" type="button" data-indice="3">
+                <img src="Imagens-Cori/adhitya-sibikumar-ElQ2pWP7JMc-unsplash.jpg"
+                     alt="Salão do restaurante visto pela vitrine à noite" loading="lazy" decoding="async">
+                <span class="foto__legenda">Salão à noite</span>
+            </button>
+
+            <button class="foto reveal" type="button" data-indice="4">
+                <img src="Imagens-Cori/qeis-ismail-BFI_VLJPiLk-unsplash.jpg"
+                     alt="Bandeiras noren penduradas sobre as mesas" loading="lazy" decoding="async">
+                <span class="foto__legenda">Noren</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- ===== RESERVA ===== -->
+    <section class="reserva secao secao--alt" id="reserva">
+        <div class="reserva__padrao" aria-hidden="true"></div>
+
+        <div class="reserva__inner">
+            <aside class="reserva__aside reveal">
+                <p class="secao__label">Venha nos visitar</p>
+                <h2 class="secao__title">Reserve sua mesa</h2>
+                <p class="reserva__texto">O balcão tem nove lugares e o menu sazonal é servido em dois turnos. Reservas confirmadas por e-mail em até 24 horas.</p>
+
+                <dl class="reserva__dados">
+                    <div class="reserva__dado">
+                        <dt>Endereço</dt>
+                        <dd>Rua das Flores, 123 — Centro</dd>
+                    </div>
+                    <div class="reserva__dado">
+                        <dt>Horário</dt>
+                        <dd>Terça a domingo, 18h às 23h</dd>
+                    </div>
+                    <div class="reserva__dado">
+                        <dt>Turnos</dt>
+                        <dd>18h30 e 21h00</dd>
+                    </div>
+                </dl>
+
+                <p class="reserva__tategaki" aria-hidden="true">御予約</p>
+            </aside>
+
+            <form class="reserva__form reveal" id="form-reserva" novalidate>
+                <div class="campo">
+                    <input type="text" id="nome" name="nome" class="campo__input" placeholder=" " autocomplete="name" required>
+                    <label for="nome" class="campo__label">Nome completo</label>
+                    <p class="campo__erro" id="erro-nome" aria-live="polite"></p>
+                </div>
+
+                <div class="campo">
+                    <input type="email" id="email" name="email" class="campo__input" placeholder=" " autocomplete="email" required>
+                    <label for="email" class="campo__label">E-mail</label>
+                    <p class="campo__erro" id="erro-email" aria-live="polite"></p>
+                </div>
+
+                <div class="campo-duplo">
+                    <div class="campo campo--preenchido">
+                        <input type="date" id="data" name="data" class="campo__input" required>
+                        <label for="data" class="campo__label">Data</label>
+                        <p class="campo__erro" id="erro-data" aria-live="polite"></p>
+                    </div>
+
+                    <div class="campo campo--preenchido campo--select">
+                        <select id="pessoas" name="pessoas" class="campo__input" required>
+                            <option value="" selected disabled></option>
+                            <option value="1">1 pessoa</option>
+                            <option value="2">2 pessoas</option>
+                            <option value="3-4">3 a 4 pessoas</option>
+                            <option value="5+">5 ou mais</option>
+                        </select>
+                        <label for="pessoas" class="campo__label">Pessoas</label>
+                        <p class="campo__erro" id="erro-pessoas" aria-live="polite"></p>
+                    </div>
+                </div>
+
+                <div class="campo">
+                    <textarea id="obs" name="obs" class="campo__input campo__input--area" placeholder=" " rows="3"></textarea>
+                    <label for="obs" class="campo__label">Observações (opcional)</label>
+                </div>
+
+                <button type="submit" class="btn btn--primary btn--bloco" id="btn-reserva">
+                    <span class="btn__texto">Confirmar reserva</span>
+                    <span class="btn__spinner" aria-hidden="true"></span>
+                </button>
+            </form>
+
+            <div class="reserva__sucesso" id="reserva-sucesso" hidden role="status">
+                <span class="reserva__sucesso-kanji" aria-hidden="true">承</span>
+                <h3 class="reserva__sucesso-titulo">Reserva recebida</h3>
+                <p class="reserva__sucesso-texto">Enviamos os detalhes para <strong id="sucesso-email"></strong>. Confirmamos por e-mail em até 24 horas.</p>
+                <button type="button" class="btn btn--ghost" id="btn-nova-reserva">Fazer outra reserva</button>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer__inner">
+            <div class="footer__marca">
+                <span class="footer__logo">Cori</span>
+                <span class="footer__kanji" aria-hidden="true">香里</span>
+                <p class="footer__frase">Cozinha japonesa sazonal desde 2019.</p>
+            </div>
+
+            <div class="footer__coluna">
+                <h4 class="footer__titulo">Endereço</h4>
+                <p>Rua das Flores, 123<br>Centro</p>
+            </div>
+
+            <div class="footer__coluna">
+                <h4 class="footer__titulo">Horário</h4>
+                <p>Terça a domingo<br>18h às 23h</p>
+            </div>
+
+            <div class="footer__coluna">
+                <h4 class="footer__titulo">Contato</h4>
+                <p><a href="tel:+551140028922">(11) 4002-8922</a><br><a href="mailto:reservas@cori.com.br">reservas@cori.com.br</a></p>
+            </div>
+        </div>
+
+        <div class="footer__base">
+            <p>© 2026 Cori Restaurante</p>
+            <p>Todos os direitos reservados</p>
+        </div>
+    </footer>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Visualização da galeria">
+        <button class="lightbox__fechar" id="lightbox-fechar" aria-label="Fechar">&times;</button>
+        <button class="lightbox__nav lightbox__nav--ant" id="lightbox-ant" aria-label="Imagem anterior">&#8249;</button>
+        <figure class="lightbox__figura">
+            <img src="" alt="" id="lightbox-img">
+            <figcaption id="lightbox-legenda"></figcaption>
+        </figure>
+        <button class="lightbox__nav lightbox__nav--prox" id="lightbox-prox" aria-label="Próxima imagem">&#8250;</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
