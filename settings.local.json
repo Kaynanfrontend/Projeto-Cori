@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(node -e \"console.log\\('node ok'\\)\")",
-      "Bash(ls \"/c/Program Files/Google/Chrome/Application/chrome.exe\" \"/c/Program Files \\(x86\\)/Microsoft/Edge/Application/msedge.exe\" 2>/dev/null; echo \"---python---\"; python --version 2>&1 | head -1)",
-      "Read(//c/Program Files/Google/Chrome/Application/**)"
-    ]
-  }
-}

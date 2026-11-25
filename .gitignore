@@ -1,0 +1,28 @@
+# Dependências e ferramentas
+node_modules/
+_docs/
+ferramentas/
+
+# Imagens brutas / originais
+Imagens/
+Imagens-Cori/
+imagem/
+fotos/
+*.psd
+*.zip
+
+# Prompts e anotações
+PROMPT*.md
+
+# Segredos
+.env
+.env.*
+*.key
+*.pem
+
+# Editor / sistema
+.claude/
+.vscode/
+.DS_Store
+Thumbs.db
+desktop.ini
