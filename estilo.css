@@ -1310,6 +1310,22 @@ input[type="date"]::-webkit-calendar-picker-indicator:hover {
     color: var(--fumaca-fraca);
 }
 
+.footer__aviso {
+    max-width: 132rem;
+    margin: 2.4rem auto 0;
+    font-family: var(--font-corpo);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--fumaca-fraca);
+}
+
+.footer__aviso span {
+    color: var(--ouro);
+}
+
 /* =========================================================
    LIGHTBOX
    ========================================================= */
